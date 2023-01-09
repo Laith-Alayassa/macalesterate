@@ -1,68 +1,92 @@
-import React from "react";
+import React, { useState } from "react";
+import { getRoomInfo, updateRoomLikes } from "../../firebase";
 
 function Likes(props) {
+  // const [updateHappened, setUpdateHappened] = useState(false);
+  const [room, setRoom] = useState(props.room);
+
   return (
-    <>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-around",
-          alignItems: "center",
-          marginTop: 8,
-        }}
-      >
+    <div>
+      <div style={styles.container}>
         <button
           className="like-button"
-          style={{
-            backgroundColor: "rgba(217, 217, 217, 0.47)",
-            borderWidth: 0,
-            borderRadius: 48,
-            fontSize: 20,
-            height: 40,
-            width: "30%",
-          }}
+          style={styles.likeButton}
           onClick={() => {
-            console.log("clicked");
+            console.log(room.id);
+            updateRoomLikes("dumpCounter", room.id).then(() => {
+              getRoomInfo(room.id).then((room) => setRoom(room));
+            });
           }}
         >
-          💩 142
+          💩 {room.dumpCounter}
         </button>
         <button
           className="like-button"
-          style={{
-            backgroundColor: "rgba(217, 217, 217, 0.47)",
-            borderWidth: 0,
-            borderRadius: 48,
-            fontSize: 20,
-            height: 40,
-            width: "30%",
-          }}
+          style={styles.likeButton}
           onClick={() => {
             console.log("clicked");
           }}
         >
-          🤩 16
+          🤩 {room.starCounter}
         </button>
         <button
           className="like-button"
-          style={{
-            backgroundColor: "rgba(217, 217, 217, 0.47)",
-            borderWidth: 0,
-            borderRadius: 48,
-            fontSize: 20,
-            height: 40,
-            width: "30%",
-          }}
+          style={styles.likeButton}
           onClick={() => {
             console.log("clicked");
           }}
         >
-          ❤️ 3
+          🔥 {room.fireCounter}
         </button>
       </div>
-    </>
+      <div style={styles.container}>
+        <button
+          className="like-button"
+          style={styles.likeButton}
+          onClick={() => {
+            console.log("clicked");
+          }}
+        >
+          😷 {room.dumpCounter}
+        </button>
+        <button
+          className="like-button"
+          style={styles.likeButton}
+          onClick={() => {
+            console.log("clicked");
+          }}
+        >
+          💍 {room.starCounter}
+        </button>
+        <button
+          className="like-button"
+          style={styles.likeButton}
+          onClick={() => {
+            console.log("clicked");
+          }}
+        >
+          🐸 {room.fireCounter}
+        </button>
+      </div>
+    </div>
   );
 }
 
+const styles = {
+  container: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    marginTop: 8,
+  },
+  likeButton: {
+    backgroundColor: "rgba(217, 217, 217, 0.47)",
+    borderWidth: 0,
+    borderRadius: 48,
+    fontSize: 20,
+    height: 40,
+    width: "30%",
+  },
+};
 export default Likes;

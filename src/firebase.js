@@ -3,13 +3,16 @@ import { initializeApp } from "firebase/app";
 // import { firebaseConfig as firebaseConfigInfo } from "./config/firebaseConfig";
 import {
   doc,
-  setDoc,
   getFirestore,
   Timestamp,
   addDoc,
   collection,
   getDocs,
-  orderBy,
+  updateDoc,
+  increment,
+  onSnapshot,
+  query,
+  getDoc,
 } from "firebase/firestore";
 import { uploadBytes, getStorage, ref, getDownloadURL } from "firebase/storage";
 import {
@@ -62,7 +65,13 @@ const uploadData = async (url) => {
     shishCounter: 0,
     building: "",
     createdAt: Timestamp.now(),
-  });
+  })
+    // Add id to the doc so I could use that ID to update it later
+    .then((docRef) => {
+      updateDoc(doc(db, "rooms", docRef.id), {
+        id: docRef.id,
+      });
+    });
 };
 
 const provider = new GoogleAuthProvider();
@@ -72,10 +81,10 @@ const singInPlz = () => {
   signInWithPopup(auth, provider)
     .then((result) => {
       // This gives you a Google Access Token. You can use it to access the Google API.
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
+      // const credential = GoogleAuthProvider.credentialFromResult(result);
+      // const token = credential.accessToken;
       // The signed-in user info.
-      const user = result.user;
+      // const user = result.user;
       // ...
     })
     .then(() => {
@@ -91,12 +100,12 @@ const singInPlz = () => {
 
     .catch((error) => {
       console.log(error);
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // The email of the user's account used.
-      // const email = error.customData.email;
-      // The AuthCredential type that was used.
-      const credential = GoogleAuthProvider.credentialFromError(error);
+      // const errorCode = error.code;
+      // const errorMessage = error.message;
+      // // The email of the user's account used.
+      // // const email = error.customData.email;
+      // // The AuthCredential type that was used.
+      // const credential = GoogleAuthProvider.credentialFromError(error);
     })
     .then(() => {
       // console.log(auth.currentUser);
@@ -119,18 +128,57 @@ const isSignedIn = () => {
   });
 };
 
+const getRoomInfo = async (roomId) => {
+  const docRef = doc(db, "rooms", roomId);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    return docSnap.data();
+  } else {
+    // doc.data() will be undefined in this case
+    console.log("No such document!");
+  }
+};
+
 const getRooms = async () => {
-  let rooms = [];
-  const querySnapshot = await getDocs(roomsCollectionReference);
-  querySnapshot.docs.forEach((doc) => {
-    rooms.push(doc.data());
+  return new Promise((resolve, reject) => {
+    const rooms = [];
+    const q = query(collection(db, "rooms"));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        rooms.push(doc.data());
+      });
+      resolve(rooms);
+    });
   });
 
-  // sort by creation date
-  rooms.sort((a, b) =>
-    a.createdAt < b.createdAt ? 1 : b.createdAt < a.createdAt ? -1 : 0
-  );
-  return rooms;
+  // let rooms = [];
+  // const querySnapshot = await onSnapshot(roomsCollectionReference, (doc) =>
+  //   console.log("Current data: ", doc.data())
+  // );
+  // console.log("====================================");
+  // console.log(querySnapshot.docs);
+  // console.log("====================================");
+  // querySnapshot.docs.forEach((doc) => {
+  //   rooms.push(doc.data());
+  // });
+
+  // // // sort by creation date
+  // // rooms.sort((a, b) =>
+  // //   a.createdAt < b.createdAt ? 1 : b.createdAt < a.createdAt ? -1 : 0
+  // // );
+  // // return rooms;
+};
+
+const updateRoomLikes = (likeType, roomID) => {
+  return new Promise((resolve, reject) => {
+    const roomRef = doc(db, "rooms", roomID);
+    updateDoc(roomRef, {
+      [likeType]: increment(1),
+    })
+      .then(() => console.log("updated"))
+      .then(() => resolve());
+  });
 };
 
 const generateID = () =>
@@ -144,4 +192,6 @@ export {
   isSignedIn,
   auth,
   getRooms,
+  getRoomInfo,
+  updateRoomLikes,
 };

@@ -40,7 +40,7 @@ export default function RoomsCards(params) {
               }}
             />
 
-            <Likes />
+            <Likes room={room} />
 
             {/* caption */}
             <p>

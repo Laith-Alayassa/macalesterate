@@ -1,12 +1,10 @@
-import { Label } from "@mui/icons-material";
-import { style } from "@mui/system";
-import React, { useState } from "react";
-import { redirect } from "react-router-dom";
+import { useState } from "react";
 import { uploadPhoto } from "../firebase";
-import Header from "./RoomsScreen/Header";
+import { redirect, useNavigate } from "react-router-dom";
 
 // import "./styles.css";
 function PhotoForm() {
+  const navigate = useNavigate();
   const [nickName, setNickName] = useState("");
   const [building, setBuilding] = useState("cafe mac");
   const [imageHolder, setImageHolder] = useState(null);
@@ -22,7 +20,7 @@ function PhotoForm() {
       onSubmit={(event) => {
         event.preventDefault();
         uploadPhoto(imageHolder, nickName);
-        redirect("/");
+        navigate("/");
       }}
     >
       <h2 style={{ marginTop: 0 }}>Your Room 🤣</h2>

@@ -13,10 +13,10 @@ function App() {
   const [user] = useAuthState(auth);
   console.count("times here");
   useEffect(() => {
-    let newRooms;
-    getRooms().then((wow) => {
-      newRooms = wow;
-      setRooms(newRooms);
+    getRooms().then((rooms) => {
+      console.log("wow");
+      console.log(rooms);
+      setRooms(rooms);
     });
   }, []);
 
