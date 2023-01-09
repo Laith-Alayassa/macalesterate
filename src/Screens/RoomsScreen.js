@@ -2,6 +2,7 @@ import React from "react";
 import { useParams, redirect } from "react-router-dom";
 import RoomsCards from "../components/RoomsScreen/RoomsCards";
 import RoomsHeader from "../components/RoomsScreen/RoomsHeader";
+import FloatingActionButton from "../components/shared/FloatingActionButton";
 import { auth, signOutPlz } from "../firebase";
 
 function RoomsScreen(props) {
@@ -19,6 +20,7 @@ function RoomsScreen(props) {
     <div style={{ backgroundColor: "#F3F6F9", paddingBottom: 400 }}>
       <RoomsHeader />
       <RoomsCards rooms={rooms} />
+      <FloatingActionButton />
     </div>
   );
 }

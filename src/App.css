@@ -48,3 +48,9 @@ color:  white;
 background: linear-gradient(90deg, rgba(22,34,42,1) 0%, rgba(58,96,115,1) 50%);
 color : white */
 }
+
+.floating-button {
+  position:fixed;
+  right: 24px;
+  bottom: 24px;
+}
