@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { uploadPhoto } from "../firebase";
 
 // import "./styles.css";
-function Form() {
+function PhotoForm() {
   const [firstName, setFirstName] = useState("");
   const [imageHolder, setImageHolder] = useState(null);
   return (
@@ -10,10 +10,7 @@ function Form() {
       enctype="multipart/form-data"
       onSubmit={(event) => {
         event.preventDefault();
-        console.log("====================================");
-        console.log(imageHolder);
-        console.log("====================================");
-        uploadPhoto(imageHolder);
+        uploadPhoto(imageHolder, firstName);
       }}
     >
       <input
@@ -29,4 +26,4 @@ function Form() {
     </form>
   );
 }
-export default Form;
+export default PhotoForm;

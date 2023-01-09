@@ -8,6 +8,8 @@ import {
   Timestamp,
   addDoc,
   collection,
+  getDocs,
+  orderBy,
 } from "firebase/firestore";
 import { uploadBytes, getStorage, ref, getDownloadURL } from "firebase/storage";
 import {
@@ -33,8 +35,9 @@ const storageRef = ref(storage);
 
 const auth = getAuth(app);
 
-const uploadPhoto = (file) => {
-  const fileRef = ref(storageRef, "work");
+const uploadPhoto = (file, fileName) => {
+  const semiRandomID = generateID();
+  const fileRef = ref(storageRef, semiRandomID);
   let downloadUrl;
   uploadBytes(fileRef, file, { test: "yes" }).then(() => {
     getDownloadURL(fileRef, file)
@@ -52,19 +55,19 @@ const uploadPhoto = (file) => {
 const uploadData = async (url) => {
   await addDoc(roomsCollectionReference, {
     url: url,
-    name: "sup",
+    name: "new doc",
     fireCounter: 0,
     dumpCounter: 0,
     starCounter: 0,
     shishCounter: 0,
     building: "",
-    createAt: Timestamp.now(),
+    createdAt: Timestamp.now(),
   });
 };
 
 const provider = new GoogleAuthProvider();
 
-const singInPlz = (setUseIn) => {
+const singInPlz = () => {
   // signInWithRedirect(auth, provider);
   signInWithPopup(auth, provider)
     .then((result) => {
@@ -85,21 +88,25 @@ const singInPlz = (setUseIn) => {
         alert("You must be a Macalester student to use this app");
       }
     })
-    .then(() => setUseIn(auth.currentUser));
-  // .catch((error) => {
-  //   console.log(error);
-  //   const errorCode = error.code;
-  //   const errorMessage = error.message;
-  //   // The email of the user's account used.
-  //   // const email = error.customData.email;
-  //   // The AuthCredential type that was used.
-  //   const credential = GoogleAuthProvider.credentialFromError(error);
-  // });
+
+    .catch((error) => {
+      console.log(error);
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      // const email = error.customData.email;
+      // The AuthCredential type that was used.
+      const credential = GoogleAuthProvider.credentialFromError(error);
+    })
+    .then(() => {
+      // console.log(auth.currentUser);
+      // setUserSignedIn(auth.currentUser);
+    });
 };
 
-const signOutPlz = (setUseIn) => {
+const signOutPlz = () => {
   signOut(auth);
-  setUseIn(auth.currentUser);
+  // setUserSignedIn(auth.currentUser);
 };
 
 let signedIn = onAuthStateChanged(auth, (user) => {
@@ -111,4 +118,30 @@ const isSignedIn = () => {
     return user ? true : false;
   });
 };
-export { uploadPhoto, singInPlz, signedIn, signOutPlz, isSignedIn, auth };
+
+const getRooms = async () => {
+  let rooms = [];
+  const querySnapshot = await getDocs(roomsCollectionReference);
+  querySnapshot.docs.forEach((doc) => {
+    rooms.push(doc.data());
+  });
+
+  // sort by creation date
+  rooms.sort((a, b) =>
+    a.createdAt < b.createdAt ? 1 : b.createdAt < a.createdAt ? -1 : 0
+  );
+  return rooms;
+};
+
+const generateID = () =>
+  new Date().getTime() / 1000 + "-" + Math.floor(Math.random() * 1000);
+
+export {
+  uploadPhoto,
+  singInPlz,
+  signedIn,
+  signOutPlz,
+  isSignedIn,
+  auth,
+  getRooms,
+};

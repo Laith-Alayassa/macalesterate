@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,16 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+.ai-rating {
+  background: rgb(20,30,48);
+  background: linear-gradient(90deg, rgba(20,30,48,1) 0%, rgba(36,59,85,1) 100%);
+color:  white;
+}
+
+.like-button {
+  /* background: rgb(22,34,42);
+background: linear-gradient(90deg, rgba(22,34,42,1) 0%, rgba(58,96,115,1) 50%);
+color : white */
 }

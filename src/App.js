@@ -1,45 +1,49 @@
-import { singInPlz, signedIn, signOutPlz, isSignedIn, auth } from "./firebase";
-import Form from "./components/form";
-import logo from "./logo.svg";
+import { singInPlz, signOutPlz, getRooms, auth } from "./firebase";
 import { useEffect, useState } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-// import "./App.css";
+import SignInScreen from "./components/SignInScreen";
+import { BrowserRouter as Router, Form, Route, Routes } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import "./App.css";
+import RoomsScreen from "./Screens/RoomsScreen";
 
+import SubmitItemScreen from "./Screens/SubmitItemScreen";
 function App() {
-  const [useIn, setUseIn] = useState(auth.currentUser);
-
-  // useEffect(() => {
-  //   setUseIn(isSignedIn());
-  // }, []);
+  // const [userSignedIn, setUserSignedIn] = useState(auth.currentUser);
+  const [rooms, setRooms] = useState(false);
+  const [user] = useAuthState(auth);
+  console.count("times here");
+  useEffect(() => {
+    let newRooms;
+    getRooms().then((wow) => {
+      newRooms = wow;
+      setRooms(newRooms);
+    });
+  }, []);
 
   const handleSignIn = () => {
-    singInPlz(setUseIn);
+    singInPlz();
   };
 
   const handleSignOut = () => {
-    signOutPlz(setUseIn);
+    // signOutPlz(setUserSignedIn);
   };
-  if (!useIn) {
-    return (
-      <div>
-        <header style={style.headerStyle}>
-          <Form />
-          <img
-            src="https://firebasestorage.googleapis.com/v0/b/macalesterate.appspot.com/o/7hrs.jpeg?alt=media&token=4afb1c9d-99e8-4bd3-8731-dec12966a7e8"
-            width={300}
-          />
-          <button onClick={handleSignIn}>Sign in</button>
-        </header>
-      </div>
-    );
-  } else {
-    return (
-      <div>
-        <button onClick={handleSignOut}>Sign out</button>
-        <p>Signed in</p>
-      </div>
-    );
-  }
+  // console.count(userSignedIn);
+
+  return (
+    <>
+      {user ? (
+        <Router>
+          <Routes>
+            <Route path="/" element={rooms && <RoomsScreen rooms={rooms} />} />
+            <Route path="/newItem" element={<SubmitItemScreen />} />
+            <Route path="/signIn" element={<p>asd</p>} />
+          </Routes>
+        </Router>
+      ) : (
+        <SignInScreen handleSignIn={handleSignIn} />
+      )}
+    </>
+  );
 }
 
 const style = {
