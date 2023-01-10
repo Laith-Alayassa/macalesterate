@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { uploadPhoto } from "../firebase";
-import { Navigate, redirect, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { PacmanLoader } from "react-spinners";
 
-// import "./styles.css";
 function PhotoForm() {
-  // const navigate = useNavigate();
   const [nickName, setNickName] = useState("");
   const [caption, setCaption] = useState("");
   const [building, setBuilding] = useState("cafe mac");

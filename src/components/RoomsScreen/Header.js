@@ -16,11 +16,17 @@ function Header(props) {
           className="circle-image"
           src={require(`../../assets/profilePics/${randomInt}.jpeg`)}
         />
-        <p style={{ fontWeight: "bold", marginLeft: 8, marginRight: 8 }}>
+        <p
+          className="shadow-text"
+          style={{
+            fontWeight: "bold",
+            marginLeft: 8,
+            marginRight: 8,
+          }}
+        >
           {room.name}
         </p>
       </div>
-      {/* <p style={{ margin: 8, fontWeight: "bold" }}>{room.building}</p> */}
     </>
   );
 }

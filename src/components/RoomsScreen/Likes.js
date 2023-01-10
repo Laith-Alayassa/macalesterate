@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, getRoomInfo, updateRoomLikes } from "../../firebase";
+import Ratings from "./Ratings";
 
 function Likes(props) {
   const index = props.index;
@@ -11,79 +12,13 @@ function Likes(props) {
   let [user] = useAuthState(auth);
 
   useEffect(() => {
-    // style elements that are already liked by current user
-    if (
-      room.usersDumbLiked.hasOwnProperty(user.email) &&
-      room.usersDumbLiked[user.email] === true
-    ) {
-      setDumpLike(true);
-      document
-        .getElementById(`dumpCounterButton${index}`)
-        .classList.add("like-button-selected");
-    }
-
-    if (
-      room.usersStarLiked.hasOwnProperty(user.email) &&
-      room.usersStarLiked[user.email] === true
-    ) {
-      setStarLike(true);
-      document
-        .getElementById(`starCounterButton${index}`)
-        .classList.add("like-button-selected");
-    }
-
-    if (
-      room.usersFireLiked.hasOwnProperty(user.email) &&
-      room.usersFireLiked[user.email] === true
-    ) {
-      setFireLike(true);
-      document
-        .getElementById(`fireCounterButton${index}`)
-        .classList.add("like-button-selected");
-    }
+    styleAlreadyLiked();
   }, []);
 
   return (
     <div>
       {/* AI rating */}
-      <div
-        className="ai-rating"
-        style={{
-          backgroundColor: "rgba(217, 217, 217, 0.47)",
-          borderWidth: 0,
-          borderRadius: 8,
-          fontSize: 20,
-          height: 40,
-          display: "flex",
-          flexDirection: "row",
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: 16,
-        }}
-      >
-        🤖 AI Rating : {room.aiRating}
-      </div>
-      <div style={styles.container}>
-        <div
-          className="community-rating"
-          style={{
-            backgroundColor: "rgba(217, 217, 217, 0.47)",
-            borderWidth: 0,
-            borderRadius: 8,
-            fontSize: 20,
-            height: 40,
-            display: "flex",
-            flexDirection: "row",
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
-            marginBottom: 8,
-          }}
-        >
-          👨‍👩‍👧‍👦 Community Rating : 49%
-        </div>
-      </div>
+      <Ratings room={room} />
 
       {/* likes */}
       <div style={styles.container}>
@@ -121,6 +56,38 @@ function Likes(props) {
       </div>
     </div>
   );
+
+  function styleAlreadyLiked() {
+    if (
+      room.usersDumbLiked.hasOwnProperty(user.email) &&
+      room.usersDumbLiked[user.email] === true
+    ) {
+      setDumpLike(true);
+      document
+        .getElementById(`dumpCounterButton${index}`)
+        .classList.add("like-button-selected");
+    }
+
+    if (
+      room.usersStarLiked.hasOwnProperty(user.email) &&
+      room.usersStarLiked[user.email] === true
+    ) {
+      setStarLike(true);
+      document
+        .getElementById(`starCounterButton${index}`)
+        .classList.add("like-button-selected");
+    }
+
+    if (
+      room.usersFireLiked.hasOwnProperty(user.email) &&
+      room.usersFireLiked[user.email] === true
+    ) {
+      setFireLike(true);
+      document
+        .getElementById(`fireCounterButton${index}`)
+        .classList.add("like-button-selected");
+    }
+  }
 }
 
 const styles = {
@@ -134,7 +101,7 @@ const styles = {
   likeButton: {
     backgroundColor: "rgba(217, 217, 217, 0.47)",
     borderWidth: 0,
-    borderRadius: 48,
+    borderRadius: 8,
     fontSize: 20,
     height: 40,
     width: "30%",

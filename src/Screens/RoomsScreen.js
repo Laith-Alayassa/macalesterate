@@ -5,9 +5,9 @@ import FloatingActionButton from "../components/shared/FloatingActionButton";
 import { auth } from "../firebase";
 
 function RoomsScreen() {
-  if (!auth.currentUser) {
-    redirect("/signIn");
-  }
+  // if (!auth.currentUser) {
+  //   redirect("/signIn");
+  // }
 
   return (
     <div

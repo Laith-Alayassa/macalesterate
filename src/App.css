@@ -18,6 +18,10 @@ input {
   all: unset;
 }
 
+.clean-link {
+  all: unset;
+}
+
 a,a:hover,a:click, a:visited{
   border:none;
   outline:none;
@@ -29,9 +33,14 @@ a,a:hover,a:click, a:visited{
 
 .circle-image {
   height: 45px;
-    clip-path: circle();
+  /* clip-path: circle(); */
+  border-radius: 50%;
+  filter: drop-shadow(0px 0px 10px #b5b5b55b);
 }
 
+.shadow-text {
+  text-shadow: 0px 0px 12px #b5b5b55b;
+}
 input[type=file]::file-selector-button {
   border: 0px;
   border-radius: 1em;
@@ -51,7 +60,8 @@ input[type=file]::file-selector-button {
   background: -moz-linear-gradient(top, #3b5998, #2b4170);
   background: -ms-linear-gradient(top, #3b5998, #2b4170);
   background: -webkit-linear-gradient(top, #3b5998, #2b4170);
-color:  white;
+  color:  white;
+  box-shadow: 0px 0px 10px #b5b5b55b;
 }
 
 .community-rating {
@@ -61,13 +71,12 @@ color:  white;
   background: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
   background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
-color:  white;
+  color:  white;
+  box-shadow: 0px 0px 10px #b5b5b55b;
 }
 
 .like-button {
-  /* background: rgb(22,34,42);
-background: linear-gradient(90deg, rgba(22,34,42,1) 0%, rgba(58,96,115,1) 50%);
-color : white */
+box-shadow: 0px 0px 15px #b5b5b5b9;
 }
 
 .like-button-selected {

@@ -6,7 +6,6 @@ import Likes from "./Likes";
 
 export default function RoomsCards() {
   const [rooms, setRooms] = useState(false);
-
   useEffect(() => {
     getRooms().then((rooms) => {
       setRooms(rooms);
@@ -33,7 +32,7 @@ export default function RoomsCards() {
                 }}
               />
               <Likes room={room} index={i} />
-              <p>
+              <p style={{ paddingLeft: 8 }}>
                 <b>{room.name}</b> {room.caption}
               </p>
 
