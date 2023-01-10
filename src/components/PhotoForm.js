@@ -6,9 +6,11 @@ import { redirect, useNavigate } from "react-router-dom";
 function PhotoForm() {
   const navigate = useNavigate();
   const [nickName, setNickName] = useState("");
+  const [caption, setCaption] = useState("");
   const [building, setBuilding] = useState("cafe mac");
   const [imageHolder, setImageHolder] = useState(null);
   return (
+    // TODO: finish form and check for profanity
     <form
       style={{
         display: "flex",
@@ -19,7 +21,7 @@ function PhotoForm() {
       enctype="multipart/form-data"
       onSubmit={(event) => {
         event.preventDefault();
-        uploadPhoto(imageHolder, nickName);
+        uploadPhoto(imageHolder, nickName, caption, building);
         navigate("/");
       }}
     >
@@ -41,8 +43,30 @@ function PhotoForm() {
         placeholder="Nickname: e.g. cafe mac"
         type="text"
         name="firstName"
+        maxLength={12}
         required
       />
+      <input
+        style={{
+          backgroundColor: "white",
+          height: 50,
+          padding: 8,
+          width: "90%",
+          borderTop: "0px",
+          borderRadius: 16,
+          border: "none",
+          marginBottom: 32,
+        }}
+        value={caption}
+        onChange={(e) => setCaption(e.target.value)}
+        placeholder="short caption"
+        type="text"
+        name="caption"
+        maxLength={100}
+        required
+      />
+
+      {/* <label>Building</label> */}
       <select
         style={{
           backgroundColor: "white",

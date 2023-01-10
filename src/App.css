@@ -1,42 +1,14 @@
-/* .App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Oleo+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+* {
+  font-family: 'Roboto', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.cursive {
+  font-family: 'Oleo Script', cursive;
+font-size: 18px;
+
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
-
 body {
   margin: 0;
   padding: 0;
@@ -58,6 +30,20 @@ a,a:hover,a:click, a:visited{
 .circle-image {
   height: 45px;
     clip-path: circle();
+}
+
+input[type=file]::file-selector-button {
+  border: 0px;
+  border-radius: 1em;
+  background-color: #2b4170;
+  background: -moz-linear-gradient(top, #3b5998, #2b4170);
+  background: -ms-linear-gradient(top, #3b5998, #2b4170);
+  background: -webkit-linear-gradient(top, #3b5998, #2b4170);
+  transition: 1s;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 10px;
+  color: white;
 }
 
 .ai-rating {

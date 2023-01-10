@@ -18,7 +18,7 @@ export default function RoomsHeader() {
       }}
     >
       <img src={require("../../assets/camera.png")} width="20" />
-      <p style={{ fontWeight: "bold" }}>Macaleste-rate</p>
+      <p className="cursive">Macaleste-rate</p>
       <img
         src={require("../../assets/logout.png")}
         width="16"

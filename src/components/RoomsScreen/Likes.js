@@ -44,7 +44,6 @@ function Likes(props) {
   }, []);
 
   return (
-    // TODO: make ratings their own component
     <div>
       {/* AI rating */}
       <div

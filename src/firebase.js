@@ -37,7 +37,7 @@ const storageRef = ref(storage);
 
 const auth = getAuth(app);
 
-const uploadPhoto = (file, fileName) => {
+const uploadPhoto = (file, nickName, caption, building) => {
   const semiRandomID = generateID();
   const fileRef = ref(storageRef, semiRandomID);
   let downloadUrl;
@@ -48,24 +48,44 @@ const uploadPhoto = (file, fileName) => {
       })
       .then(() => console.log(downloadUrl))
       .then(() => {
-        uploadData(downloadUrl);
+        uploadData(downloadUrl, nickName, caption, building);
       });
   });
 };
 
-const uploadData = async (url) => {
+const uploadData = async (url, nickName, caption, building) => {
+  const aiEmoji = [
+    "🤩",
+    "💩",
+    "💍",
+    "🤝",
+    "🐸",
+    "🙅‍♂️",
+    "😷",
+    "🫦",
+    "🤯",
+    "🤢",
+    "🤭",
+    "⭐️",
+    "🫡",
+    "🙈",
+  ];
+
+  const randomEmoji = aiEmoji[Math.floor(Math.random() * aiEmoji.length)];
   await addDoc(roomsCollectionReference, {
     url: url,
-    name: "new doc",
+    name: nickName,
+    caption: caption,
     fireCounter: 0,
     dumpCounter: 0,
     starCounter: 0,
     shishCounter: 0,
-    building: "",
+    building: building,
     createdAt: Timestamp.now(),
     usersDumbLiked: {},
     usersStarLiked: {},
     usersFireLiked: {},
+    aiRating: randomEmoji,
   })
     // Add id to the doc so I could use that ID to update it later
     .then((docRef) => {
