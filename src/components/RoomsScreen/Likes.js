@@ -125,11 +125,11 @@ const handleClick = (
   performUpvote ? room[likesName]++ : room[likesName]--;
 
   let collectionOfLikes;
-  if (likesName == "dumpCounter") {
+  if (likesName === "dumpCounter") {
     collectionOfLikes = "usersDumbLiked";
-  } else if (likesName == "starCounter") {
+  } else if (likesName === "starCounter") {
     collectionOfLikes = "usersStarLiked";
-  } else if (likesName == "fireCounter") {
+  } else if (likesName === "fireCounter") {
     collectionOfLikes = "usersFireLiked";
   }
 
