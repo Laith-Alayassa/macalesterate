@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import { useEffect, useState } from "react";
 import { PacmanLoader } from "react-spinners";
 import { getRooms } from "../../firebase";
@@ -5,19 +6,31 @@ import Header from "./Header";
 import Likes from "./Likes";
 
 export default function RoomsCards() {
+  const [orderByRating, setOrderByRating] = useState(false);
   const [rooms, setRooms] = useState(false);
   useEffect(() => {
-    getRooms().then((rooms) => {
+    getRooms(orderByRating).then((rooms) => {
       setRooms(rooms);
     });
-  }, []);
+  }, [orderByRating]);
 
+  // const order = (a, b) => {
+  //   return a.score > b.score ? 1 : -1;
+  // };
   if (rooms) {
     return (
       <>
-        {rooms.map((room, i) => {
+        <button
+          onClick={() => {
+            setOrderByRating(!orderByRating);
+          }}
+        >
+          order
+        </button>
+        {rooms.map((room) => {
+          const i = `${room.id[5]}${Math.floor(Math.random() * 100)}`;
           return (
-            <div style={{ marginLeft: 16, marginRight: 16 }}>
+            <div key={i} style={{ marginLeft: 16, marginRight: 16 }}>
               <hr style={{ opacity: "30%", padding: 0, marginBottom: 16 }} />
 
               <Header room={room} />

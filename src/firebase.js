@@ -91,6 +91,7 @@ const uploadData = async (url, nickName, caption, building) => {
     usersStarLiked: {},
     usersFireLiked: {},
     aiRating: randomEmoji,
+    score: 0,
   })
     // Add id to the doc so I could use that ID to update it later
     .then((docRef) => {
@@ -153,7 +154,7 @@ const getRoomInfo = async (roomId) => {
  * gets the rooms from the database
  * @returns array of rooms
  */
-const getRooms = async () => {
+const getRooms = async (orderByScore) => {
   return new Promise((resolve, reject) => {
     const rooms = [];
     const q = query(collection(db, "rooms"));
@@ -161,9 +162,15 @@ const getRooms = async () => {
       querySnapshot.forEach((doc) => {
         rooms.push(doc.data());
       });
-      rooms.sort((a, b) =>
-        a.createdAt < b.createdAt ? 1 : b.createdAt < a.createdAt ? -1 : 0
-      );
+      if (orderByScore) {
+        rooms.sort((a, b) =>
+          a.score < b.score ? 1 : b.score < a.score ? -1 : 0
+        );
+      } else {
+        rooms.sort((a, b) =>
+          a.createdAt < b.createdAt ? 1 : b.createdAt < a.createdAt ? -1 : 0
+        );
+      }
       resolve(rooms);
     });
   });
@@ -176,12 +183,27 @@ const updateRoomLikes = (
   collectionOfLikes
 ) => {
   return new Promise((resolve, reject) => {
+    let scoreChange = 0;
+    console.log("====================================");
+    console.log(likeType);
+    console.log("====================================");
+    if (likeType === "fireCounter") {
+      scoreChange = 2;
+    } else if (likeType === "starCounter") {
+      scoreChange = 1;
+    } else if (likeType === "dumpCounter") {
+      scoreChange = -1;
+    }
+
     const roomRef = doc(db, "rooms", roomID);
     const currUserEmail = auth.currentUser.email;
     getCollectionOfLikes(roomID, collectionOfLikes).then(
       (prevCollectionOfLikes) => {
         updateDoc(roomRef, {
           [likeType]: performUpvote ? increment(1) : increment(-1),
+          score: performUpvote
+            ? increment(scoreChange)
+            : increment(-scoreChange),
           [collectionOfLikes]: {
             ...prevCollectionOfLikes,
             [currUserEmail]: performUpvote,
