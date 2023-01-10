@@ -9,7 +9,6 @@ function RoomsScreen(props) {
   let params = useParams();
 
   const id = params.id;
-  console.log(id);
   const rooms = props.rooms;
   const key = props.key;
   if (!auth.currentUser) {

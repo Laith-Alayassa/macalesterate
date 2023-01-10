@@ -44,7 +44,6 @@ const uploadPhoto = (file, fileName) => {
   uploadBytes(fileRef, file, { test: "yes" }).then(() => {
     getDownloadURL(fileRef, file)
       .then((url) => {
-        console.log("url baby");
         downloadUrl = url;
       })
       .then(() => console.log(downloadUrl))
@@ -91,9 +90,6 @@ const singInPlz = () => {
     })
     .then(() => {
       const user = auth.currentUser;
-      console.log("====loggin in user================================");
-      console.log(user.email);
-      console.log("====================================");
       // if (!user.email.endsWith("@macalester.edu")) {
       //   signOut(auth);
       //   alert("You must be a Macalester student to use this app");

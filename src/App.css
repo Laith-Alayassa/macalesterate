@@ -46,6 +46,20 @@ input {
   all: unset;
 }
 
+a,a:hover,a:click, a:visited{
+  border:none;
+  outline:none;
+  text-decoration:none;
+  color:inherit;
+  -webkit-tap-highlight-color: white;
+  all: unset;
+}
+
+.circle-image {
+  height: 45px;
+    clip-path: circle();
+}
+
 .ai-rating {
   background-color: #2b4170;
   background: -moz-linear-gradient(top, #3b5998, #2b4170);

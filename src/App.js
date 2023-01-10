@@ -14,8 +14,6 @@ function App() {
   console.count("times here");
   useEffect(() => {
     getRooms().then((rooms) => {
-      console.log("wow");
-      console.log(rooms);
       setRooms(rooms);
     });
   }, []);
