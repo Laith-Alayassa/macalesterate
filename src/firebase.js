@@ -7,7 +7,6 @@ import {
   Timestamp,
   addDoc,
   collection,
-  getDocs,
   updateDoc,
   increment,
   onSnapshot,
@@ -65,6 +64,9 @@ const uploadData = async (url) => {
     shishCounter: 0,
     building: "",
     createdAt: Timestamp.now(),
+    usersDumbLiked: {},
+    usersStarLiked: {},
+    usersFireLiked: {},
   })
     // Add id to the doc so I could use that ID to update it later
     .then((docRef) => {
@@ -92,10 +94,10 @@ const singInPlz = () => {
       console.log("====loggin in user================================");
       console.log(user.email);
       console.log("====================================");
-      if (!user.email.endsWith("@macalester.edu")) {
-        signOut(auth);
-        alert("You must be a Macalester student to use this app");
-      }
+      // if (!user.email.endsWith("@macalester.edu")) {
+      //   signOut(auth);
+      //   alert("You must be a Macalester student to use this app");
+      // }
     })
 
     .catch((error) => {
@@ -148,37 +150,48 @@ const getRooms = async () => {
       querySnapshot.forEach((doc) => {
         rooms.push(doc.data());
       });
+      rooms.sort((a, b) =>
+        a.createdAt < b.createdAt ? 1 : b.createdAt < a.createdAt ? -1 : 0
+      );
       resolve(rooms);
     });
   });
-
-  // let rooms = [];
-  // const querySnapshot = await onSnapshot(roomsCollectionReference, (doc) =>
-  //   console.log("Current data: ", doc.data())
-  // );
-  // console.log("====================================");
-  // console.log(querySnapshot.docs);
-  // console.log("====================================");
-  // querySnapshot.docs.forEach((doc) => {
-  //   rooms.push(doc.data());
-  // });
-
-  // // // sort by creation date
-  // // rooms.sort((a, b) =>
-  // //   a.createdAt < b.createdAt ? 1 : b.createdAt < a.createdAt ? -1 : 0
-  // // );
-  // // return rooms;
 };
 
-const updateRoomLikes = (likeType, roomID) => {
+const updateRoomLikes = (
+  likeType,
+  roomID,
+  performUpvote,
+  collectionOfLikes
+) => {
   return new Promise((resolve, reject) => {
     const roomRef = doc(db, "rooms", roomID);
-    updateDoc(roomRef, {
-      [likeType]: increment(1),
-    })
-      .then(() => console.log("updated"))
-      .then(() => resolve());
+    const currUserEmail = auth.currentUser.email;
+    getCollectionOfLikes(roomID, collectionOfLikes).then(
+      (prevCollectionOfLikes) => {
+        updateDoc(roomRef, {
+          [likeType]: performUpvote ? increment(1) : increment(-1),
+          [collectionOfLikes]: {
+            ...prevCollectionOfLikes,
+            [currUserEmail]: performUpvote,
+          },
+        }).then(() => resolve());
+      }
+    );
   });
+};
+
+const getCollectionOfLikes = async (roomID, collectionOfLikes) => {
+  const docRef = doc(db, "rooms", roomID);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    const data = docSnap.data();
+
+    return data[collectionOfLikes];
+  } else {
+    console.log("No such document!");
+  }
 };
 
 const generateID = () =>
