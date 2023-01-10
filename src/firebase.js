@@ -1,6 +1,4 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-// import { firebaseConfig as firebaseConfigInfo } from "./config/firebaseConfig";
 import {
   doc,
   getFirestore,
@@ -38,18 +36,22 @@ const storageRef = ref(storage);
 const auth = getAuth(app);
 
 const uploadPhoto = (file, nickName, caption, building) => {
-  const semiRandomID = generateID();
-  const fileRef = ref(storageRef, semiRandomID);
-  let downloadUrl;
-  uploadBytes(fileRef, file, { test: "yes" }).then(() => {
-    getDownloadURL(fileRef, file)
-      .then((url) => {
-        downloadUrl = url;
-      })
-      .then(() => console.log(downloadUrl))
-      .then(() => {
-        uploadData(downloadUrl, nickName, caption, building);
-      });
+  return new Promise((resolve, reject) => {
+    const semiRandomID = generateID();
+    const fileRef = ref(storageRef, semiRandomID);
+    let downloadUrl;
+    uploadBytes(fileRef, file, { test: "yes" }).then(() => {
+      getDownloadURL(fileRef, file)
+        .then((url) => {
+          downloadUrl = url;
+        })
+        .then(() => console.log(downloadUrl))
+        .then(() => {
+          uploadData(downloadUrl, nickName, caption, building).then(() => {
+            resolve();
+          });
+        });
+    });
   });
 };
 
@@ -61,14 +63,17 @@ const uploadData = async (url, nickName, caption, building) => {
     "🤝",
     "🐸",
     "🙅‍♂️",
-    "😷",
     "🫦",
     "🤯",
-    "🤢",
     "🤭",
     "⭐️",
     "🫡",
     "🙈",
+    "😻",
+    "🫶",
+    "👏",
+    "👎",
+    "😿",
   ];
 
   const randomEmoji = aiEmoji[Math.floor(Math.random() * aiEmoji.length)];
@@ -107,27 +112,13 @@ const singInPlz = () => {
       // The signed-in user info.
       // const user = result.user;
       // ...
+      console.log("signed in");
     })
-    .then(() => {
-      const user = auth.currentUser;
-      // if (!user.email.endsWith("@macalester.edu")) {
-      //   signOut(auth);
-      //   alert("You must be a Macalester student to use this app");
-      // }
-    })
-
     .catch((error) => {
       console.log(error);
-      // const errorCode = error.code;
-      // const errorMessage = error.message;
-      // // The email of the user's account used.
-      // // const email = error.customData.email;
-      // // The AuthCredential type that was used.
+      console.log(error.code);
+      console.log(error.message);
       // const credential = GoogleAuthProvider.credentialFromError(error);
-    })
-    .then(() => {
-      // console.log(auth.currentUser);
-      // setUserSignedIn(auth.currentUser);
     });
 };
 
@@ -158,6 +149,10 @@ const getRoomInfo = async (roomId) => {
   }
 };
 
+/**
+ * gets the rooms from the database
+ * @returns array of rooms
+ */
 const getRooms = async () => {
   return new Promise((resolve, reject) => {
     const rooms = [];

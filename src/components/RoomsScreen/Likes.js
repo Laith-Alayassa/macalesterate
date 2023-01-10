@@ -62,7 +62,7 @@ function Likes(props) {
           marginTop: 16,
         }}
       >
-        🤖 AI Rating : 💩
+        🤖 AI Rating : {room.aiRating}
       </div>
       <div style={styles.container}>
         <div

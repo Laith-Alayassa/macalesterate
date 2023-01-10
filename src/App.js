@@ -9,14 +9,9 @@ import RoomsScreen from "./Screens/RoomsScreen";
 import SubmitItemScreen from "./Screens/SubmitItemScreen";
 function App() {
   // const [userSignedIn, setUserSignedIn] = useState(auth.currentUser);
-  const [rooms, setRooms] = useState(false);
+
   const [user] = useAuthState(auth);
   console.count("times here");
-  useEffect(() => {
-    getRooms().then((rooms) => {
-      setRooms(rooms);
-    });
-  }, []);
 
   const handleSignIn = () => {
     singInPlz();
@@ -26,13 +21,13 @@ function App() {
     // signOutPlz(setUserSignedIn);
   };
   // console.count(userSignedIn);
-
+  // TODO : re-render after upload
   return (
     <>
       {user ? (
         <Router>
           <Routes>
-            <Route path="/" element={rooms && <RoomsScreen rooms={rooms} />} />
+            <Route path="/" element={<RoomsScreen />} />
             <Route path="/newItem" element={<SubmitItemScreen />} />
             <Route path="/signIn" element={<p>asd</p>} />
           </Routes>
@@ -43,18 +38,5 @@ function App() {
     </>
   );
 }
-
-const style = {
-  headerStyle: {
-    color: "white",
-    display: "flex",
-    backgroundColor: "grey",
-    flex: 1,
-    flexDirection: "column",
-    height: "100vh",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-};
 
 export default App;

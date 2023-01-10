@@ -1,37 +1,62 @@
+import { useEffect, useState } from "react";
+import { PacmanLoader } from "react-spinners";
+import { getRooms } from "../../firebase";
 import Header from "./Header";
 import Likes from "./Likes";
 
-export default function RoomsCards(params) {
-  const rooms = params.rooms;
-  return (
-    <>
-      {rooms.map((room, i) => {
-        return (
-          <div style={{ marginLeft: 16, marginRight: 16 }}>
-            <hr style={{ opacity: "30%", padding: 0, marginBottom: 16 }} />
+export default function RoomsCards() {
+  const [rooms, setRooms] = useState(false);
 
-            <Header room={room} />
+  useEffect(() => {
+    getRooms().then((rooms) => {
+      setRooms(rooms);
+    });
+  }, []);
 
-            <img
-              src={room.url}
-              style={{
-                marginTop: 16,
-                maxWidth: "100%",
-                borderRadius: 8,
-                boxShadow: "0 3px 10px 0 rgba(0,10,0,0.3)",
-              }}
-            />
-            <Likes room={room} index={i} />
-            <p>
-              <b>{room.name}</b> {room.caption}
-            </p>
+  if (rooms) {
+    return (
+      <>
+        {rooms.map((room, i) => {
+          return (
+            <div style={{ marginLeft: 16, marginRight: 16 }}>
+              <hr style={{ opacity: "30%", padding: 0, marginBottom: 16 }} />
 
-            {/* caption */}
-          </div>
-        );
-      })}
-    </>
-  );
+              <Header room={room} />
+
+              <img
+                src={room.url}
+                style={{
+                  marginTop: 16,
+                  maxWidth: "100%",
+                  borderRadius: 8,
+                  boxShadow: "0 3px 10px 0 rgba(0,10,0,0.3)",
+                }}
+              />
+              <Likes room={room} index={i} />
+              <p>
+                <b>{room.name}</b> {room.caption}
+              </p>
+
+              {/* caption */}
+            </div>
+          );
+        })}
+      </>
+    );
+  } else {
+    return (
+      <div
+        style={{
+          position: "fixed",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+        }}
+      >
+        <PacmanLoader color="#064639" />
+      </div>
+    );
+  }
 }
 
 const styles = {
