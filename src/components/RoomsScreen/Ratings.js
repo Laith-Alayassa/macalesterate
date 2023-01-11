@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Ratings({ room }) {
+export default function Ratings({ room, ranking }) {
   return (
     <>
       <div
@@ -38,7 +38,7 @@ export default function Ratings({ room }) {
             marginBottom: 8,
           }}
         >
-          👨‍👩‍👧‍👦 Community Rating : 49%
+          👨‍👩‍👧‍👦 Community Ranking : {ranking}
         </div>
       </div>
     </>

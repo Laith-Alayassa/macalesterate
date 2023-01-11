@@ -5,6 +5,8 @@ import Ratings from "./Ratings";
 
 function Likes(props) {
   const index = props.index;
+  const ranking = props.ranking;
+
   const [room, setRoom] = useState(props.room);
   const [dumpLike, setDumpLike] = useState(false);
   const [starLike, setStarLike] = useState(false);
@@ -18,7 +20,7 @@ function Likes(props) {
   return (
     <div>
       {/* AI rating */}
-      <Ratings room={room} />
+      <Ratings room={room} ranking={ranking} />
 
       {/* likes */}
       <div style={styles.container}>

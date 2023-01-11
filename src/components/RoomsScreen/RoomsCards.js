@@ -41,7 +41,7 @@ export default function RoomsCards() {
           🪜 leaderboard Mode : {orderByRating ? "ACTIVE  " : "INACTIVE"}
         </p>
 
-        {rooms.map((room) => {
+        {rooms.map((room, ranking) => {
           const i = `${room.id[5]}${Math.floor(Math.random() * 100)}`;
           return (
             <div key={i} style={{ marginLeft: 16, marginRight: 16 }}>
@@ -58,7 +58,11 @@ export default function RoomsCards() {
                   boxShadow: "0 3px 10px 0 rgba(0,10,0,0.3)",
                 }}
               />
-              <Likes room={room} index={i} />
+              <Likes
+                room={room}
+                index={i}
+                ranking={orderByRating ? `#${ranking + 1}` : "👀"}
+              />
               <p style={{ paddingLeft: 8 }}>
                 <b>{room.name}</b> {room.caption}
               </p>
