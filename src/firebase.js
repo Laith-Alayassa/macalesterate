@@ -18,6 +18,7 @@ import {
   getAuth,
   onAuthStateChanged,
   signOut,
+  getAdditionalUserInfo,
 } from "firebase/auth";
 import info from "./config/firenaseConfigInfo";
 
@@ -113,6 +114,9 @@ const singInPlz = () => {
       // The signed-in user info.
       // const user = result.user;
       // ...
+
+      const details = getAdditionalUserInfo(result);
+      console.log(details.isNewUser);
       console.log("signed in");
     })
     .catch((error) => {

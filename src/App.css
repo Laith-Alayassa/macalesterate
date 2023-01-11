@@ -121,3 +121,18 @@ color : white
   bottom: 24px;
 }
 
+.instructions {
+  margin-left: 8px;
+  margin-right: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(211, 211, 211, 0.451);
+  border-radius: 8px;
+  border-width: 4px;
+  border-style: dashed;
+  border-color: gray;
+
+}
+

@@ -10,9 +10,6 @@ import SubmitItemScreen from "./Screens/SubmitItemScreen";
 // TODO : add dice bear
 function App() {
   const [user] = useAuthState(auth);
-  const handleSignIn = () => {
-    singInPlz();
-  };
 
   return (
     <>
@@ -25,7 +22,7 @@ function App() {
           </Routes>
         </Router>
       ) : (
-        <SignInScreen handleSignIn={handleSignIn} />
+        <SignInScreen />
       )}
     </>
   );

@@ -1,7 +1,11 @@
 import React from "react";
+import { singInPlz } from "../firebase";
 
 function SignInScreen(props) {
-  const handleSignIn = props.handleSignIn;
+  const handleSignIn = () => {
+    singInPlz();
+  };
+
   return (
     <div style={style.loginContainer}>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
