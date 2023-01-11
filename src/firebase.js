@@ -93,6 +93,7 @@ const uploadData = async (url, nickName, caption, building) => {
     usersFireLiked: {},
     aiRating: randomEmoji,
     score: 0,
+    avatarURL: `https://api.dicebear.com/5.x/open-peeps/svg?seed=${nickName}&backgroundColor=b6e3f4,c0aede,d1d4f9&scale=110&translateX=-8&skinColor=694d3d,ae5d29,d08b5b&maskProbability=20&facialHairProbability=30`,
   })
     // Add id to the doc so I could use that ID to update it later
     .then((docRef) => {

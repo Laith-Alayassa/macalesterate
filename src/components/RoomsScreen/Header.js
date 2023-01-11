@@ -2,7 +2,6 @@ import React from "react";
 
 function Header(props) {
   const room = props.room;
-  const randomInt = Math.floor(Math.random() * 7) + 1;
   return (
     <>
       <div
@@ -12,10 +11,8 @@ function Header(props) {
           alignItems: "center",
         }}
       >
-        <img
-          className="circle-image"
-          src={require(`../../assets/profilePics/${randomInt}.jpeg`)}
-        />
+        {/* // Images from https://dicebear.com/ which is totally awesome */}
+        <img className="circle-image" src={room.avatarURL} />
         <p
           className="shadow-text"
           style={{
