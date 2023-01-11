@@ -17,7 +17,10 @@ export default function RoomsHeader() {
         paddingRight: 16,
       }}
     >
-      <img src={require("../../assets/camera.png")} width="20" />
+      <a href="/newitem">
+        <img src={require("../../assets/camera.png")} width="20" />
+      </a>
+      <div></div>
       <a href="/" className="clean-link">
         <p className="cursive">Macaleste-rate</p>
       </a>

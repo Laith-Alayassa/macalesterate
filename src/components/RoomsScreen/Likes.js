@@ -2,8 +2,21 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, getRoomInfo, updateRoomLikes } from "../../firebase";
 import Ratings from "./Ratings";
+import ConfettiExplosion from "confetti-explosion-react";
+
+const tinyExplodeProps = {
+  force: 0.9,
+  duration: 3000,
+  particleCount: 20,
+  height: 500,
+  width: 500,
+};
 
 function Likes(props) {
+  // const [isExploding, setIsExploding] = useState(false);
+  const [isExplodingDumb, setIsExplodingDumb] = useState(false);
+  const [isExplodingStar, setIsExplodingStar] = useState(false);
+  const [isExplodingFire, setIsExplodingFire] = useState(false);
   const index = props.index;
   const ranking = props.ranking;
 
@@ -30,18 +43,32 @@ function Likes(props) {
           style={styles.likeButton}
           onClick={(e) => {
             handleClick(e, "dumpCounter", dumpLike, setDumpLike, room, setRoom);
+            setIsExplodingDumb(!dumpLike);
+            setTimeout(() => setIsExplodingDumb(false), 1800);
           }}
         >
+          {isExplodingDumb && (
+            <div>
+              <ConfettiExplosion {...tinyExplodeProps} />
+            </div>
+          )}
           💩 {room.dumpCounter}
         </button>
         <button
           className="like-button"
           id={`starCounterButton${index}`}
           style={styles.likeButton}
-          onClick={(e) =>
-            handleClick(e, "starCounter", starLike, setStarLike, room, setRoom)
-          }
+          onClick={(e) => {
+            handleClick(e, "starCounter", starLike, setStarLike, room, setRoom);
+            setIsExplodingStar(!starLike);
+            setTimeout(() => setIsExplodingStar(false), 1800);
+          }}
         >
+          {isExplodingStar && (
+            <div>
+              <ConfettiExplosion {...tinyExplodeProps} />
+            </div>
+          )}
           🤩 {room.starCounter}
         </button>
 
@@ -49,10 +76,17 @@ function Likes(props) {
           className="like-button"
           id={`fireCounterButton${index}`}
           style={styles.likeButton}
-          onClick={(e) =>
-            handleClick(e, "fireCounter", fireLike, setFireLike, room, setRoom)
-          }
+          onClick={(e) => {
+            handleClick(e, "fireCounter", fireLike, setFireLike, room, setRoom);
+            setIsExplodingFire(!fireLike);
+            setTimeout(() => setIsExplodingFire(false), 1800);
+          }}
         >
+          {isExplodingFire && (
+            <div>
+              <ConfettiExplosion {...tinyExplodeProps} />
+            </div>
+          )}
           🔥 {room.fireCounter}
         </button>
       </div>
@@ -99,6 +133,7 @@ const styles = {
     justifyContent: "space-around",
     alignItems: "center",
     marginTop: 8,
+    padding: 8,
   },
   likeButton: {
     backgroundColor: "rgba(217, 217, 217, 0.47)",

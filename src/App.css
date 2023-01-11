@@ -55,14 +55,14 @@ input[type=file]::file-selector-button {
   color: white;
 }
 
-.ai-rating {
-  background-color: #2b4170;
-  background: -moz-linear-gradient(top, #3b5998, #2b4170);
-  background: -ms-linear-gradient(top, #3b5998, #2b4170);
-  background: -webkit-linear-gradient(top, #3b5998, #2b4170);
-  color:  white;
-  box-shadow: 0px 0px 10px #b5b5b55b;
+.file-selected {
+  background-color: #3fb300;
+  background: -moz-linear-gradient(top, #3b986e, #06d136);
+  background: -ms-linear-gradient(top, #3b986e, #06d136);
+  background: -webkit-linear-gradient(top, #3b986e, #06d136);
 }
+
+
 
 #leaderboard  {
   position: -webkit-sticky;
@@ -94,6 +94,26 @@ input[type=file]::file-selector-button {
   transition: 2s;
 }
 
+.ai-rating {
+  background-color: #2b4170;
+  background: -moz-linear-gradient(top, #3b5998, #2b4170);
+  background: -ms-linear-gradient(top, #3b5998, #2b4170);
+  background: -webkit-linear-gradient(top, #3b5998, #2b4170);
+  color:  white;
+  box-shadow: 0px 0px 10px #b5b5b55b;
+  background-color: "rgba(217, 217, 217, 0.47)";
+  border-width:   0px;
+  border-radius: 8px;
+  font-size: 20px;
+  height: 40px;
+  display:flex;
+  flex-direction: row;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+}
+
 .community-rating {
   background: rgb(52,29,172);
   background: #f09433; 
@@ -102,7 +122,18 @@ input[type=file]::file-selector-button {
   background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
   color:  white;
+  background-color: "rgba(217, 217, 217, 0.47)";
   box-shadow: 0px 0px 10px #b5b5b55b;
+  border-width:   0px;
+  border-radius: 8px;
+  font-size: 20px;
+  height: 40px;
+  display:flex;
+  flex-direction: row;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
 }
 
 .like-button {
@@ -117,8 +148,12 @@ color : white
 
 .floating-button {
   position:fixed;
-  right: 24px;
+  width: 100vw;
   bottom: 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .instructions {
@@ -136,3 +171,45 @@ color : white
 
 }
 
+.bounce {
+    -webkit-animation: bounce 10s infinite;
+    animation: bounce 10s infinite;
+}
+
+/* Scroll down indicator (bouncing) */
+@-webkit-keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    -webkit-transform: translateY(0); }
+  40% {
+    -webkit-transform: translateY(-30px); }
+  60% {
+    -webkit-transform: translateY(-15px); } }
+@-moz-keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    -moz-transform: translateY(0); }
+  40% {
+    -moz-transform: translateY(-30px); }
+  60% {
+    -moz-transform: translateY(-15px); } }
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0); }
+  40% {
+    -webkit-transform: translateY(-30px);
+    -moz-transform: translateY(-30px);
+    -ms-transform: translateY(-30px);
+    -o-transform: translateY(-30px); 
+    transform: translateY(-30px);
+    transform: scale(1.15);}
+  60% {
+    -webkit-transform: translateY(-15px);
+    -moz-transform: translateY(-15px);
+    -ms-transform: translateY(-15px);
+    -o-transform: translateY(-15px);
+    transform: translateY(-15px);
+  
+ } }

@@ -100,7 +100,7 @@ function PhotoForm() {
           <option value="Language Houses">Language</option>
         </select>
 
-        <h3>Upload Image</h3>
+        <h3>{imageHolder ? "file chosen successfully 👍" : "Upload Image"}</h3>
         <input
           required
           style={{
@@ -114,7 +114,11 @@ function PhotoForm() {
             marginBottom: 32,
           }}
           type="file"
-          onChange={(e) => setImageHolder(e.target.files[0])}
+          accept="image/*"
+          onChange={(e) => {
+            setImageHolder(e.target.files[0]);
+            e.target.classList.add("file-selected");
+          }}
         />
         <input type="submit" value="Submit" required />
       </form>

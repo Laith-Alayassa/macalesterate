@@ -61,7 +61,7 @@ export default function RoomsCards() {
               <Likes
                 room={room}
                 index={i}
-                ranking={orderByRating ? `#${ranking + 1}` : "👀"}
+                ranking={orderByRating ? ranking + 1 : "👀"}
               />
               <p style={{ paddingLeft: 8 }}>
                 <b>{room.name}</b> {room.caption}

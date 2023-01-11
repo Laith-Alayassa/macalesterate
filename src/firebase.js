@@ -189,9 +189,7 @@ const updateRoomLikes = (
 ) => {
   return new Promise((resolve, reject) => {
     let scoreChange = 0;
-    console.log("====================================");
-    console.log(likeType);
-    console.log("====================================");
+
     if (likeType === "fireCounter") {
       scoreChange = 2;
     } else if (likeType === "starCounter") {

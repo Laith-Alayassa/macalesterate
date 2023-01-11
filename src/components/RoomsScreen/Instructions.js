@@ -6,7 +6,7 @@ export default function Instructions() {
       <p style={{ fontSize: 24 }}>Welcome to Macaleste-rate</p>
       <p style={{ fontSize: 80, margin: 0 }}>🥳</p>
       <p>View and rank rooms from the Mac community</p>
-      <p>Upload your own using the + button in the corner</p>
+      <p>Upload your own using the + button below</p>
     </div>
   );
 }

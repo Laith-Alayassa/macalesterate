@@ -1,45 +1,22 @@
 import React from "react";
 
 export default function Ratings({ room, ranking }) {
+  let displayedRank;
+
+  if (ranking === 1) {
+    displayedRank = "🥇 #1  🥇";
+  } else if (ranking === 2) {
+    displayedRank = "🥈 #2  🥈";
+  } else if (ranking === 3) {
+    displayedRank = "🥉 #3  🥉";
+  } else {
+    displayedRank = `👨‍👩‍👧‍👦 Community Ranking : ${ranking}`;
+  }
   return (
     <>
-      <div
-        className="ai-rating"
-        style={{
-          backgroundColor: "rgba(217, 217, 217, 0.47)",
-          borderWidth: 0,
-          borderRadius: 8,
-          fontSize: 20,
-          height: 40,
-          display: "flex",
-          flexDirection: "row",
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: 16,
-        }}
-      >
-        🤖 AI Rating : {room.aiRating}
-      </div>
+      <div className="ai-rating">🤖 AI Rating : {room.aiRating}</div>
       <div style={styles.container}>
-        <div
-          className="community-rating"
-          style={{
-            backgroundColor: "rgba(217, 217, 217, 0.47)",
-            borderWidth: 0,
-            borderRadius: 8,
-            fontSize: 20,
-            height: 40,
-            display: "flex",
-            flexDirection: "row",
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
-            marginBottom: 8,
-          }}
-        >
-          👨‍👩‍👧‍👦 Community Ranking : {ranking}
-        </div>
+        <div className="community-rating">{displayedRank}</div>
       </div>
     </>
   );
