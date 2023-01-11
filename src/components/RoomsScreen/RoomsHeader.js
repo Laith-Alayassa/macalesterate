@@ -20,7 +20,6 @@ export default function RoomsHeader() {
       <a href="/newitem">
         <img src={require("../../assets/camera.png")} width="20" />
       </a>
-      <div></div>
       <a href="/" className="clean-link">
         <p className="cursive">Macaleste-rate</p>
       </a>

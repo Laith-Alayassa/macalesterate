@@ -71,13 +71,21 @@ input[type=file]::file-selector-button {
   left: 8px;
   z-index: 100;
   width: calc(100% - 16px);
-  height: 40px;
+  height: 50px;
+  border-width: 0px;
+  border-radius: 8px;
+  font-size: 20px;
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 .leaderboard-inactive {
   background: -webkit-linear-gradient(360deg, #dee1e1 10%, #f4f4f4 360%);
   background: -moz-linear-gradient(360deg, #dee1e1 10%, #f4f4f4 360%);
    background: linear-gradient(360deg, #dee1e1 10%, #f4f4f4 360%);
-   box-shadow: 0px 0px 8px #6f6f6f73;
+   box-shadow: 0px 0px 8px #632b7095;
    color: lightslategray;
    transition:2s; 
 }
@@ -213,3 +221,17 @@ color : white
     transform: translateY(-15px);
   
  } }
+
+ @keyframes wiggle {
+  0% { transform: rotate(0deg); }
+ 80% { transform: rotate(0deg); }
+ 85% { transform: rotate(5deg); }
+ 87% { transform: rotate(-5deg); }
+ 88% { transform: rotate(0deg); }
+}
+
+.wiggle {
+display: inline-block;
+animation: wiggle 10s infinite;
+}
+

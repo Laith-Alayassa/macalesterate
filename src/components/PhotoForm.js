@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { uploadPhoto } from "../firebase";
 import { Navigate } from "react-router-dom";
-import { PacmanLoader } from "react-spinners";
+import PacLoader from "./shared/PacLoader";
 
 function PhotoForm() {
   const [nickName, setNickName] = useState("");
@@ -124,18 +124,7 @@ function PhotoForm() {
       </form>
     );
   } else {
-    return (
-      <div
-        style={{
-          position: "fixed",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-        }}
-      >
-        <PacmanLoader color="#064639" />
-      </div>
-    );
+    return <PacLoader />;
   }
 }
 export default PhotoForm;

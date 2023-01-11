@@ -5,9 +5,9 @@ import Ratings from "./Ratings";
 import ConfettiExplosion from "confetti-explosion-react";
 
 const tinyExplodeProps = {
-  force: 0.9,
+  force: 0.8,
   duration: 3000,
-  particleCount: 20,
+  particleCount: 10,
   height: 500,
   width: 500,
 };
