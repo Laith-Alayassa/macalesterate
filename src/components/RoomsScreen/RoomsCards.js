@@ -20,13 +20,27 @@ export default function RoomsCards() {
   if (rooms) {
     return (
       <>
-        <button
-          onClick={() => {
+        <p
+          id="leaderboard"
+          className="leaderboard-inactive"
+          onClick={(e) => {
             setOrderByRating(!orderByRating);
+            e.target.classList.toggle("leaderboard-active");
+          }}
+          style={{
+            borderWidth: 0,
+            borderRadius: 8,
+            fontSize: 20,
+            display: "flex",
+            flexDirection: "row",
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
-          order
-        </button>
+          🪜 leaderboard Mode : {orderByRating ? "ACTIVE  " : "INACTIVE"}
+        </p>
+
         {rooms.map((room) => {
           const i = `${room.id[5]}${Math.floor(Math.random() * 100)}`;
           return (

@@ -7,6 +7,7 @@ import RoomsScreen from "./Screens/RoomsScreen";
 import SubmitItemScreen from "./Screens/SubmitItemScreen";
 
 // TODO : create leader board page
+// TODO : add dice bear
 function App() {
   const [user] = useAuthState(auth);
   const handleSignIn = () => {
