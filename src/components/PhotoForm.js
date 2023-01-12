@@ -29,10 +29,15 @@ function PhotoForm() {
         onSubmit={(event) => {
           event.preventDefault();
           setLoading(true);
-          uploadPhoto(imageHolder, nickName, caption, building).then(() => {
-            // navigate("/");
-            setGoToHome(true);
-          });
+          uploadPhoto(imageHolder, nickName, caption, building)
+            .then(() => {
+              // navigate("/");
+              setGoToHome(true);
+            })
+            .catch(() => {
+              alert("🙅‍♂️ No bad words allowed 🙅‍♂️");
+              setLoading(false);
+            });
         }}
       >
         <h2 style={{ marginTop: 0 }}>Your Room 🤣</h2>

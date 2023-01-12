@@ -36,8 +36,15 @@ const storageRef = ref(storage);
 
 const auth = getAuth(app);
 
+let Filter = require("bad-words");
+let filter = new Filter();
+
 const uploadPhoto = (file, nickName, caption, building) => {
   return new Promise((resolve, reject) => {
+    if (filter.isProfane(nickName) || filter.isProfane(caption)) {
+      reject();
+      return;
+    }
     const semiRandomID = generateID();
     const fileRef = ref(storageRef, semiRandomID);
     let downloadUrl;
