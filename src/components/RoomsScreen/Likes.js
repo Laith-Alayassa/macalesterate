@@ -132,8 +132,7 @@ const styles = {
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    marginTop: 8,
-    padding: 8,
+    marginTop: 16,
   },
   likeButton: {
     backgroundColor: "rgba(217, 217, 217, 0.47)",

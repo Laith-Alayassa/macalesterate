@@ -82,10 +82,11 @@ input[type=file]::file-selector-button {
   align-items: center;
 }
 .leaderboard-inactive {
-  background: -webkit-linear-gradient(360deg, #dee1e1 10%, #f4f4f4 360%);
+  /* background: -webkit-linear-gradient(360deg, #dee1e1 10%, #f4f4f4 360%);
   background: -moz-linear-gradient(360deg, #dee1e1 10%, #f4f4f4 360%);
    background: linear-gradient(360deg, #dee1e1 10%, #f4f4f4 360%);
-   box-shadow: 0px 0px 8px #632b7095;
+    */
+    box-shadow: 0px 0px 2px #4d4d4d95;
    color: lightslategray;
    transition:2s; 
 }
@@ -98,31 +99,31 @@ input[type=file]::file-selector-button {
   background: -webkit-linear-gradient(45deg, #632b70 , #3b5998);
 
   color:  white;
-  box-shadow: 0px 0px 15px #666666fd;
+  box-shadow: 0px 0px 5px #666666fd;
   transition: 2s;
 }
 
 .ai-rating {
-  background-color: #2b4170;
+  background-color: #354259;
+  
   background: -moz-linear-gradient(top, #3b5998, #2b4170);
   background: -ms-linear-gradient(top, #3b5998, #2b4170);
-  background: -webkit-linear-gradient(top, #3b5998, #2b4170);
+  background: -webkit-linear-gradient(top, #36508a, #2b4170);
   color:  white;
   box-shadow: 0px 0px 10px #b5b5b55b;
   background-color: "rgba(217, 217, 217, 0.47)";
   border-width:   0px;
   border-radius: 8px;
   font-size: 20px;
-  height: 40px;
   display:flex;
-  flex-direction: row;
   flex: 1;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   margin-top: 16px;
 }
 
 .community-rating {
+  /* background-color:  #554994; */
   background: rgb(52,29,172);
   background: #f09433; 
   background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
@@ -135,17 +136,19 @@ input[type=file]::file-selector-button {
   border-width:   0px;
   border-radius: 8px;
   font-size: 20px;
-  height: 40px;
   display:flex;
-  flex-direction: row;
   flex: 1;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  margin-bottom: 8px;
+  margin-left: 8px;
+  margin-top: 16px;
+  padding-left: 4px;
+  padding-right: 4px;
+
 }
 
 .like-button {
-box-shadow: 0px 0px 15px #b5b5b5b9;
+/* box-shadow: 0px 0px 15px #b5b5b5b9; */
 }
 
 .like-button-selected {
@@ -179,12 +182,12 @@ color : white
 
 }
 
-.bounce {
+ .bounce {
     -webkit-animation: bounce 10s infinite;
     animation: bounce 10s infinite;
 }
 
-/* Scroll down indicator (bouncing) */
+
 @-webkit-keyframes bounce {
   0%, 20%, 50%, 80%, 100% {
     -webkit-transform: translateY(0); }
@@ -219,19 +222,19 @@ color : white
     -ms-transform: translateY(-15px);
     -o-transform: translateY(-15px);
     transform: translateY(-15px);
-  
- } }
+  } }
+
 
  @keyframes wiggle {
   0% { transform: rotate(0deg); }
  80% { transform: rotate(0deg); }
  85% { transform: rotate(5deg); }
- 87% { transform: rotate(-5deg); }
- 88% { transform: rotate(0deg); }
+ 90% { transform: rotate(-5deg); }
+ 100% { transform: rotate(0deg); }
 }
 
 .wiggle {
 display: inline-block;
-animation: wiggle 10s infinite;
+animation: wiggle 5s infinite;
 }
 
