@@ -21,7 +21,18 @@ function RoomsScreen() {
       }}
     >
       <RoomsHeader />
+
+      {/* LOGO */}
+      {/* <img
+        src={require("../assets/logo.png")}
+        width="100%"
+        alt="logo"
+        style={{ borderRadius: 8 }}
+      /> */}
+
+      {/* Instructions */}
       {isNewUser && <Instructions />}
+
       <RoomsCards />
       <FloatingActionButton />
     </div>
