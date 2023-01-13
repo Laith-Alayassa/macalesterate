@@ -5,6 +5,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import "./App.css";
 import RoomsScreen from "./Screens/RoomsScreen";
 import SubmitItemScreen from "./Screens/SubmitItemScreen";
+import ChatRoom from "./Screens/ChatRoom";
 
 function App() {
   const [user] = useAuthState(auth);
@@ -16,6 +17,7 @@ function App() {
           <Routes>
             <Route path="/" element={<RoomsScreen />} />
             <Route path="/newItem" element={<SubmitItemScreen />} />
+            <Route path="/chat" element={<ChatRoom />} />
             <Route path="/signIn" element={<p>a</p>} />
           </Routes>
         </Router>

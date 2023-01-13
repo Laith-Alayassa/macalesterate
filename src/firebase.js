@@ -10,6 +10,8 @@ import {
   onSnapshot,
   query,
   getDoc,
+  orderBy,
+  limit,
 } from "firebase/firestore";
 import { uploadBytes, getStorage, ref, getDownloadURL } from "firebase/storage";
 import {
@@ -244,6 +246,7 @@ const generateID = () =>
   new Date().getTime() / 1000 + "-" + Math.floor(Math.random() * 1000);
 
 export {
+  db,
   uploadPhoto,
   singInPlz,
   signedIn,

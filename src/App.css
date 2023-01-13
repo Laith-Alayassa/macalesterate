@@ -281,3 +281,71 @@ input[type="range"]::-webkit-slider-thumb {
 /* 	transform: scale(1.05); */
 	z-index: -1;
 }
+
+
+
+
+.chat-form {
+  height: 10vh;
+  position: fixed;
+  bottom: 0;
+  background-color: rgb(24, 23, 23);
+  width: 100%;
+  max-width: 728px;
+  display: flex;
+  font-size: 1.5rem;
+}
+
+.send-message-button {
+  width: 30vw;
+  background-color: #3b5998;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1.25rem;
+}
+
+
+.chat-input {
+  line-height: 1.5;
+  width: 100vw;
+  font-size: 1.5rem;
+  background: #354259;
+  color: white;
+  outline: none;
+  border: none;
+  padding: 0 10px;
+}
+
+
+.chat-text {
+  max-width: 500px;
+  margin-bottom: 12px;
+  line-height: 24px;
+  padding: 10px 20px;
+  border-radius: 25px;
+  position: relative;
+  color: white;
+  text-align: center;
+}
+
+.message {
+  display: flex;
+  align-items: center;
+}
+
+
+.sent {
+  flex-direction: row-reverse;
+}
+
+.sent p {
+  color: white;
+  background: #0b93f6;
+  align-self: flex-end;
+}
+.received p {
+  background: #e5e5ea;
+  color: black;
+}
