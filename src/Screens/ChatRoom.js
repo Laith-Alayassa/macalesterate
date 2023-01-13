@@ -1,48 +1,76 @@
-import { query, limit, orderBy, setDoc, doc, addDoc } from "firebase/firestore";
+import { query, limit, orderBy, addDoc } from "firebase/firestore";
 import { collection } from "firebase/firestore";
 import { useCollection } from "react-firebase-hooks/firestore";
 import PacLoader from "../components/shared/PacLoader";
 import { auth, db } from "../firebase";
 import RoomsHeader from "../components/RoomsScreen/RoomsHeader";
+const Filter = require("bad-words");
+const filter = new Filter();
+
 export default function ChatRoom() {
   const q = query(
     collection(db, "messages"),
-    orderBy("createdAt", "asc"),
+    orderBy("createdAt", "desc"),
     limit(25)
   );
+
   const [value, loading, error] = useCollection(q);
 
   return (
     <div>
-      <RoomsHeader />
-      {error && <strong>Error (╯°□°)╯︵ ┻━┻ </strong>}
-      {loading && <PacLoader />}
-      {value && (
-        <span>
-          {value.docs.map((doc) => (
-            <Message key={doc.id} doc={doc} />
-          ))}
-        </span>
-      )}
-
-      <form
-        className="chat-form"
-        onSubmit={async (e) => {
-          e.preventDefault();
-          const message = e.target.elements[0].value;
-          await addDoc(collection(db, "messages"), {
-            text: message,
-            uid: auth.currentUser.uid,
-            createdAt: new Date(),
-          });
-          e.target.reset();
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 100,
+          backgroundColor: "white",
         }}
       >
-        <input className="chat-input" type="text" />
-        <button className="send-message-button" type="submit">
-          Send
-        </button>
-      </form>
+        <RoomsHeader />
+      </div>
+      <div style={{ paddingTop: 58, paddingBottom: 88 }}>
+        {error && <strong>Error (╯°□°)╯︵ ┻━┻ </strong>}
+        {loading && <PacLoader />}
+        {value && (
+          <>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column",
+              }}
+            >
+              <span style={{ fontSize: 24, padding: 0, margin: 0, height: 10 }}>
+                .
+              </span>
+              <span style={{ fontSize: 24, padding: 0, margin: 0, height: 10 }}>
+                .
+              </span>
+              <span style={{ fontSize: 24, padding: 0, margin: 0, height: 10 }}>
+                .
+              </span>
+            </div>
+            <span>
+              {value.docs
+                .slice(0)
+                .reverse()
+                .map((doc) => (
+                  <Message key={doc.id} doc={doc} />
+                ))}
+            </span>
+          </>
+        )}
+
+        <form className="chat-form" onSubmit={handleSubmit}>
+          <input className="chat-input" type="text" />
+          <button className="send-message-button" type="submit">
+            Send
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
@@ -55,3 +83,19 @@ function Message({ doc }) {
     </div>
   );
 }
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  // checks if length of message is 0
+  if (!e.target.elements[0].value) return;
+  const message = filter.clean(e.target.elements[0].value);
+
+  await addDoc(collection(db, "messages"), {
+    text: message,
+    uid: auth.currentUser.uid,
+    createdAt: new Date(),
+  });
+  //
+  window.scrollTo(0, document.body.scrollHeight);
+  e.target.reset();
+};
