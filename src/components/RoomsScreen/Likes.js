@@ -3,6 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, getRoomInfo, updateRoomLikes } from "../../firebase";
 import Ratings from "./Ratings";
 import ConfettiExplosion from "confetti-explosion-react";
+import RatingSlider from "./RatingSlider";
 
 const tinyExplodeProps = {
   force: 0.8,
@@ -35,6 +36,7 @@ function Likes(props) {
       {/* AI rating */}
       <Ratings room={room} ranking={ranking} />
 
+      {/* // TODO: make this its own component and place the use State inside it to reduce  re-renders  */}
       {/* likes */}
       <div style={styles.container}>
         <button
@@ -90,6 +92,10 @@ function Likes(props) {
           🔥 {room.fireCounter}
         </button>
       </div>
+
+      {/* slider */}
+      {/* // TODO: activate slider */}
+      {/* <RatingSlider /> */}
     </div>
   );
 

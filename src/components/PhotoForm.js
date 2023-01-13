@@ -17,7 +17,6 @@ function PhotoForm() {
 
   if (!loading) {
     return (
-      // TODO: finish form and check for profanity
       <form
         style={{
           display: "flex",

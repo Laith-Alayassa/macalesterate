@@ -12,6 +12,7 @@ font-size: 18px;
 body {
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
 input {
@@ -238,3 +239,45 @@ display: inline-block;
 animation: wiggle 5s infinite;
 }
 
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #36508a;
+  cursor: ew-resize;
+  box-shadow: 0 0 2px 0 #555;
+  transition: background .3s ease-in-out;
+}
+
+
+.bubble {
+	height: 40px;
+	width: 40%;
+	background: white;
+	display: block;
+	margin: 0 auto;
+	border-radius: 5px;
+	text-align: center;
+}
+
+.pointer {
+	height: 40px;
+	width: 10px;
+	background: white;
+	margin: 0 auto;
+	/* transform: rotate(45deg); */
+	border-radius: 0 0 12px 0;
+	margin-top: -22px;
+	position: relative;
+	left: calc(0.5vw );
+}
+
+.blurred {
+	background: gray;
+	filter: blur(20px);
+	position: relative;
+	top: -315px;
+/* 	transform: scale(1.05); */
+	z-index: -1;
+}

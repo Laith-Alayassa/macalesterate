@@ -6,8 +6,6 @@ import "./App.css";
 import RoomsScreen from "./Screens/RoomsScreen";
 import SubmitItemScreen from "./Screens/SubmitItemScreen";
 
-// TODO : create leader board page
-// TODO : add dice bear
 function App() {
   const [user] = useAuthState(auth);
 
@@ -18,7 +16,7 @@ function App() {
           <Routes>
             <Route path="/" element={<RoomsScreen />} />
             <Route path="/newItem" element={<SubmitItemScreen />} />
-            <Route path="/signIn" element={<p>asd</p>} />
+            <Route path="/signIn" element={<p>a</p>} />
           </Routes>
         </Router>
       ) : (

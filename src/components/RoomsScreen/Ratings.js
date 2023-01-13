@@ -10,18 +10,12 @@ export default function Ratings({ room, ranking }) {
   } else if (ranking === 3) {
     displayedRank = "🥉 #3  🥉";
   } else {
-    displayedRank = `#${ranking}`;
+    displayedRank = `👨‍👩‍👧‍👦 Mac Rating: #${ranking}`;
   }
   return (
     <div style={{ display: "flex", flexDirection: "row", height: 80 }}>
-      <div className="ai-rating">
-        <div style={{ margin: 0, padding: 0 }}>🤖 AI Rating :</div>
-        <div style={{ margin: 0, padding: 0 }}>{room.aiRating}</div>
-      </div>
-      <div className="community-rating">
-        <div style={{ margin: 0, padding: 0 }}>👨‍👩‍👧‍👦 Mac Rating: </div>
-        <div style={{ margin: 0, padding: 0 }}>{displayedRank}</div>
-      </div>
+      <div className="ai-rating">🤖 AI Rating : {room.aiRating}</div>
+      <div className="community-rating">{displayedRank}</div>
     </div>
   );
 }
