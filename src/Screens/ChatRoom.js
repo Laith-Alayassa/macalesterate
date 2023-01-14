@@ -108,7 +108,7 @@ const handleSubmit = async (e) => {
     uid: auth.currentUser.uid,
     createdAt: new Date(),
   });
-  //
+
   window.scrollTo({
     top: document.body.scrollHeight,
     behavior: "smooth",

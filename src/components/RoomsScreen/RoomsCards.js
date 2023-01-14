@@ -1,11 +1,12 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { useEffect, useState } from "react";
-import { PacmanLoader } from "react-spinners";
 import { getRooms } from "../../firebase";
 import PacLoader from "../shared/PacLoader";
 import Header from "./Header";
 import LeaderboardButton from "./LeaderboardButton";
 import Likes from "./Likes";
+import CommentButton from "./CommentButton";
+import CommentConfirmation from "./CommentConfirmation";
 
 export default function RoomsCards() {
   const [orderByRating, setOrderByRating] = useState(false);
@@ -26,7 +27,7 @@ export default function RoomsCards() {
           setOrderByRating={setOrderByRating}
           orderByRating={orderByRating}
         />
-
+        <CommentConfirmation />
         {/* Rooms */}
         {roomsMap(roomsByScore, roomsByDate, orderByRating)}
       </>
@@ -35,37 +36,17 @@ export default function RoomsCards() {
     return <PacLoader />;
   }
 }
-
-const styles = {
-  container: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-    marginTop: 8,
-  },
-  likeButton: {
-    backgroundColor: "rgba(217, 217, 217, 0.47)",
-    borderWidth: 0,
-    borderRadius: 48,
-    fontSize: 20,
-    height: 40,
-    width: "30%",
-  },
-};
-
 function roomsMap(roomsByScore, roomsByDate, orderByRating) {
   if (orderByRating) {
     return roomsByScore.map((room, ranking) => {
       const i = `${Math.floor(Math.random() * 100)}${room.id}${Math.floor(
         Math.random() * 100
       )}`;
+
       return (
         <div key={i} style={{ marginLeft: 16, marginRight: 16 }}>
           <hr style={{ opacity: "30%", padding: 0, marginBottom: 16 }} />
-
           <Header room={room} />
-
           <img
             src={room.url}
             style={{
@@ -80,11 +61,16 @@ function roomsMap(roomsByScore, roomsByDate, orderByRating) {
             index={i}
             ranking={orderByRating ? ranking + 1 : "👀"}
           />
-          <p style={{ paddingLeft: 8 }}>
-            <b>{room.name}</b> {room.caption}
-          </p>
 
-          {/* caption */}
+          <CommentButton roomId={room.id} />
+          {/* comments */}
+          {room.comments.map((comment, i) => {
+            return (
+              <p key={i} style={{ paddingLeft: 8 }}>
+                <b>Comment:</b> {comment}
+              </p>
+            );
+          })}
         </div>
       );
     });
@@ -96,9 +82,7 @@ function roomsMap(roomsByScore, roomsByDate, orderByRating) {
       return (
         <div key={i} style={{ marginLeft: 16, marginRight: 16 }}>
           <hr style={{ opacity: "30%", padding: 0, marginBottom: 16 }} />
-
           <Header room={room} />
-
           <img
             src={room.url}
             style={{
@@ -112,12 +96,16 @@ function roomsMap(roomsByScore, roomsByDate, orderByRating) {
             room={room}
             index={i}
             ranking={orderByRating ? ranking + 1 : "👀"}
-          />
-          <p style={{ paddingLeft: 8 }}>
-            <b>{room.name}</b> {room.caption}
-          </p>
-
-          {/* caption */}
+          />{" "}
+          <CommentButton roomId={room.id} />
+          {/* comments */}
+          {room.comments.map((comment, i) => {
+            return (
+              <p key={i} style={{ paddingLeft: 8 }}>
+                <b>Comment:</b> {comment}
+              </p>
+            );
+          })}
         </div>
       );
     });

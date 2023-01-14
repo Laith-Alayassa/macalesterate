@@ -12,6 +12,7 @@ import {
   getDoc,
   orderBy,
   limit,
+  arrayUnion,
 } from "firebase/firestore";
 import { uploadBytes, getStorage, ref, getDownloadURL } from "firebase/storage";
 import {
@@ -102,6 +103,7 @@ const uploadData = async (url, nickName, caption, building) => {
     usersFireLiked: {},
     aiRating: randomEmoji,
     score: 0,
+    comments: [],
     avatarURL: `https://api.dicebear.com/5.x/miniavs/svg?seed=${nickName}&backgroundColor=b6e3f4,c0aede,d1d4f9&scale=110`,
   })
     // Add id to the doc so I could use that ID to update it later
@@ -242,6 +244,13 @@ const getCollectionOfLikes = async (roomID, collectionOfLikes) => {
   }
 };
 
+const addComment = (comment, id) => {
+  const commentRef = doc(db, "rooms", id);
+  updateDoc(commentRef, {
+    comments: arrayUnion(comment),
+  });
+};
+
 const generateID = () =>
   new Date().getTime() / 1000 + "-" + Math.floor(Math.random() * 1000);
 
@@ -256,4 +265,5 @@ export {
   getRooms,
   getRoomInfo,
   updateRoomLikes,
+  addComment,
 };

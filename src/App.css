@@ -83,10 +83,10 @@ input[type=file]::file-selector-button {
   align-items: center;
 }
 .leaderboard-inactive {
-  /* background: -webkit-linear-gradient(360deg, #dee1e1 10%, #f4f4f4 360%);
+  background: -webkit-linear-gradient(360deg, #dee1e1 10%, #f4f4f4 360%);
   background: -moz-linear-gradient(360deg, #dee1e1 10%, #f4f4f4 360%);
    background: linear-gradient(360deg, #dee1e1 10%, #f4f4f4 360%);
-    */
+   
     box-shadow: 0px 0px 2px #4d4d4d95;
    color: lightslategray;
    transition:2s; 
@@ -357,4 +357,56 @@ input[type="range"]::-webkit-slider-thumb {
   width: 100%;
   left: 0;
   right: 0;
+}
+
+.comment-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-radius: 8px;
+  background-color: rgba(217, 217, 217, 0.47);
+}
+
+.submit-comment-button {
+  background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+button, input[type="submit"], input[type="reset"] {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
+.comment-confirmation {
+  transition: 1.5s;
+  position: fixed;
+  top: -200px;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction:row;
+  align-items: center;
+  justify-content: center;
+  background-color: #27cc29;
+  border-radius: 8px;
+  margin-left: 8px;
+  margin-right: 8px;
+  height: 100px;
+  color: white;
+  font-size: 1.1rem;
+  /* display: none; */
 }

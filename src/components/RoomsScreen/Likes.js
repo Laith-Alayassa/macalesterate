@@ -3,7 +3,6 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, getRoomInfo, updateRoomLikes } from "../../firebase";
 import Ratings from "./Ratings";
 import ConfettiExplosion from "confetti-explosion-react";
-import RatingSlider from "./RatingSlider";
 
 const tinyExplodeProps = {
   force: 0.8,
@@ -14,7 +13,6 @@ const tinyExplodeProps = {
 };
 
 function Likes(props) {
-  // const [isExploding, setIsExploding] = useState(false);
   const [isExplodingDumb, setIsExplodingDumb] = useState(false);
   const [isExplodingStar, setIsExplodingStar] = useState(false);
   const [isExplodingFire, setIsExplodingFire] = useState(false);
@@ -136,7 +134,7 @@ const styles = {
   container: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     alignItems: "center",
     marginTop: 16,
   },
