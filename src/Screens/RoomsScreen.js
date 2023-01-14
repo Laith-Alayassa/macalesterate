@@ -2,7 +2,7 @@ import { redirect } from "react-router-dom";
 import Instructions from "../components/RoomsScreen/Instructions";
 import RoomsCards from "../components/RoomsScreen/RoomsCards";
 import RoomsHeader from "../components/RoomsScreen/RoomsHeader";
-import FloatingActionButton from "../components/shared/FloatingActionButton";
+import MyBottomNavigation from "../components/shared/MyBottomNavigation";
 import { auth } from "../firebase";
 
 function RoomsScreen() {
@@ -34,7 +34,9 @@ function RoomsScreen() {
       {isNewUser && <Instructions />}
 
       <RoomsCards />
-      <FloatingActionButton />
+      <MyBottomNavigation />
+
+      {/* <FloatingActionButton /> */}
     </div>
   );
 

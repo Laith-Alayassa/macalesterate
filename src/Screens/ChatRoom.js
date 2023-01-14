@@ -1,5 +1,4 @@
-import { query, limit, orderBy, addDoc } from "firebase/firestore";
-import { collection } from "firebase/firestore";
+import { collection, query, limit, orderBy, addDoc } from "firebase/firestore";
 import { useCollection } from "react-firebase-hooks/firestore";
 import PacLoader from "../components/shared/PacLoader";
 import { auth, db } from "../firebase";
@@ -8,6 +7,14 @@ const Filter = require("bad-words");
 const filter = new Filter();
 
 export default function ChatRoom() {
+  // Scroll to bottom of page
+  setTimeout(() => {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: "smooth",
+    });
+  }, 1000);
+
   const q = query(
     collection(db, "messages"),
     orderBy("createdAt", "desc"),
@@ -30,7 +37,14 @@ export default function ChatRoom() {
       >
         <RoomsHeader />
       </div>
-      <div style={{ paddingTop: 58, paddingBottom: 88 }}>
+      <div
+        style={{
+          paddingTop: 58,
+          paddingBottom: 88,
+          paddingLeft: 8,
+          paddingRight: 8,
+        }}
+      >
         {error && <strong>Error (╯°□°)╯︵ ┻━┻ </strong>}
         {loading && <PacLoader />}
         {value && (
@@ -63,14 +77,13 @@ export default function ChatRoom() {
             </span>
           </>
         )}
-
-        <form className="chat-form" onSubmit={handleSubmit}>
-          <input className="chat-input" type="text" />
-          <button className="send-message-button" type="submit">
-            Send
-          </button>
-        </form>
       </div>
+      <form className="chat-form" onSubmit={handleSubmit}>
+        <input className="chat-input" type="text" />
+        <button className="send-message-button" type="submit">
+          Send
+        </button>
+      </form>
     </div>
   );
 }
@@ -96,6 +109,9 @@ const handleSubmit = async (e) => {
     createdAt: new Date(),
   });
   //
-  window.scrollTo(0, document.body.scrollHeight);
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: "smooth",
+  });
   e.target.reset();
 };

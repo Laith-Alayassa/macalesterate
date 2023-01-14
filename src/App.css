@@ -349,3 +349,12 @@ input[type="range"]::-webkit-slider-thumb {
   background: #e5e5ea;
   color: black;
 }
+
+
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  right: 0;
+}
