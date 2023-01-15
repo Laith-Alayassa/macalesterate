@@ -10,8 +10,6 @@ import {
   onSnapshot,
   query,
   getDoc,
-  orderBy,
-  limit,
   arrayUnion,
 } from "firebase/firestore";
 import { uploadBytes, getStorage, ref, getDownloadURL } from "firebase/storage";
@@ -130,6 +128,13 @@ const singInPlz = () => {
       const details = getAdditionalUserInfo(result);
       // console.log(details.isNewUser);
       console.log("signed in");
+    })
+    .then(() => {
+      const user = auth.currentUser;
+      // if (!user.email.endsWith("@macalester.edu")) {
+      //   signOut(auth);
+      //   alert("You must sign in with your Macalester e-mail");
+      // }
     })
     .catch((error) => {
       console.log(error);
