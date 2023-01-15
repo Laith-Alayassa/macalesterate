@@ -3,6 +3,7 @@ import { useCollection } from "react-firebase-hooks/firestore";
 import PacLoader from "../components/shared/PacLoader";
 import { auth, db } from "../firebase";
 import RoomsHeader from "../components/RoomsScreen/RoomsHeader";
+import Message from "../components/ChatRoom/Message";
 const Filter = require("bad-words");
 const filter = new Filter();
 
@@ -24,7 +25,7 @@ export default function ChatRoom() {
   const [value, loading, error] = useCollection(q);
 
   return (
-    <div>
+    <div style={{ overflowX: "hidden" }}>
       <div
         style={{
           position: "fixed",
@@ -88,23 +89,6 @@ export default function ChatRoom() {
   );
 }
 
-function Message({ doc }) {
-  const state = auth.currentUser.uid === doc.data().uid ? "sent" : "received";
-  const displayName = doc.data().userName;
-  var nameArr = displayName.split(" ");
-  const name = `${nameArr[0]} ${nameArr[1][0]}.`;
-  return (
-    <div>
-      <div className={`chat-name ${state}`}>
-        <span>{name}</span>
-      </div>
-      <div className={`message ${state}`} key={doc.id}>
-        <p className="chat-text">{doc.data().text}</p>
-      </div>
-    </div>
-  );
-}
-
 const handleSubmit = async (e) => {
   e.preventDefault();
   // checks if length of message is 0
@@ -116,6 +100,7 @@ const handleSubmit = async (e) => {
     uid: auth.currentUser.uid,
     createdAt: new Date(),
     userName: auth.currentUser.displayName,
+    poops: 0,
   });
 
   window.scrollTo({

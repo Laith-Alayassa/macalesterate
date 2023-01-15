@@ -19,8 +19,8 @@ export default function Instructions() {
           textAlign: "center",
         }}
       >
-        You can post images with a nick name. comments will have your first name
-        and second initial
+        Images use nicknames. comments and messages use your first name and
+        second initial
       </div>
     </div>
   );
