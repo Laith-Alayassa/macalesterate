@@ -7,7 +7,7 @@ import LeaderboardButton from "./LeaderboardButton";
 import Likes from "./Likes";
 import CommentButton from "./CommentButton";
 import CommentConfirmation from "./CommentConfirmation";
-
+import Comments from "./Comments";
 export default function RoomsCards() {
   const [orderByRating, setOrderByRating] = useState(false);
   const [roomsByDate, setRoomsByDate] = useState(false);
@@ -42,7 +42,6 @@ function roomsMap(roomsByScore, roomsByDate, orderByRating) {
       const i = `${Math.floor(Math.random() * 100)}${room.id}${Math.floor(
         Math.random() * 100
       )}`;
-
       return (
         <div key={i} style={{ marginLeft: 16, marginRight: 16 }}>
           <hr style={{ opacity: "30%", padding: 0, marginBottom: 16 }} />
@@ -61,16 +60,9 @@ function roomsMap(roomsByScore, roomsByDate, orderByRating) {
             index={i}
             ranking={orderByRating ? ranking + 1 : "👀"}
           />
-
           <CommentButton roomId={room.id} />
           {/* comments */}
-          {room.comments.map((comment, i) => {
-            return (
-              <p key={i} style={{ paddingLeft: 8 }}>
-                <b>Comment:</b> {comment}
-              </p>
-            );
-          })}
+          <Comments room={room} />
         </div>
       );
     });
@@ -99,13 +91,7 @@ function roomsMap(roomsByScore, roomsByDate, orderByRating) {
           />{" "}
           <CommentButton roomId={room.id} />
           {/* comments */}
-          {room.comments.map((comment, i) => {
-            return (
-              <p key={i} style={{ paddingLeft: 8 }}>
-                <b>Comment:</b> {comment}
-              </p>
-            );
-          })}
+          <Comments room={room} />
         </div>
       );
     });

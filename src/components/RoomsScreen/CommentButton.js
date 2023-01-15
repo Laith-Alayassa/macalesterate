@@ -44,7 +44,7 @@ export default function CommentButton(props) {
         <AddCommentIcon
           fontSize="large"
           color="secondary"
-          style={{ flex: 1, paddingRight: 16, paddingLeft: 16 }}
+          style={{ flex: 1, paddingRight: 16, paddingLeft: 16, paddingTop: 8 }}
         />
       </button>
     </form>

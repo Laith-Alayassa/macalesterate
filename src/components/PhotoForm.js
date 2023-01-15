@@ -52,6 +52,8 @@ function PhotoForm() {
             border: "none",
             marginBottom: 32,
           }}
+          pattern="/^[a-zA-Z]+$/g"
+          title="No special characters allowed"
           value={nickName}
           onChange={(e) => setNickName(e.target.value)}
           placeholder="Nickname: e.g. cafe mac"

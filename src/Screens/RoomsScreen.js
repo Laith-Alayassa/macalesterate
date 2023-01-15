@@ -10,7 +10,7 @@ function RoomsScreen() {
     redirect("/signIn");
   }
 
-  let isNewUser = checkIfNewUser();
+  // let isNewUser = checkIfNewUser();
 
   return (
     <div
@@ -31,7 +31,7 @@ function RoomsScreen() {
       /> */}
 
       {/* Instructions */}
-      {isNewUser && <Instructions />}
+      <Instructions />
 
       <RoomsCards />
       <MyBottomNavigation />

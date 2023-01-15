@@ -246,8 +246,13 @@ const getCollectionOfLikes = async (roomID, collectionOfLikes) => {
 
 const addComment = (comment, id) => {
   const commentRef = doc(db, "rooms", id);
+  const user = auth.currentUser;
+  if (user === null) return;
+  const displayName = user.displayName;
+  var nameArr = displayName.split(" ");
+  const name = `${nameArr[0]} ${nameArr[1][0]}.`;
   updateDoc(commentRef, {
-    comments: arrayUnion(comment),
+    comments: arrayUnion({ name, comment }),
   });
 };
 
