@@ -11,6 +11,7 @@ import {
   query,
   getDoc,
   arrayUnion,
+  arrayRemove,
 } from "firebase/firestore";
 import { uploadBytes, getStorage, ref, getDownloadURL } from "firebase/storage";
 import {
@@ -261,6 +262,16 @@ const addComment = (comment, id) => {
   });
 };
 
+const updatePoopCounter = (messageID, performUpvote) => {
+  const messageRef = doc(db, "messages", messageID);
+  updateDoc(messageRef, {
+    poopCounter: performUpvote ? increment(1) : increment(-1),
+    usersPooped: performUpvote
+      ? arrayUnion(auth.currentUser.email)
+      : arrayRemove(auth.currentUser.email),
+  });
+};
+
 const generateID = () =>
   new Date().getTime() / 1000 + "-" + Math.floor(Math.random() * 1000);
 
@@ -276,4 +287,5 @@ export {
   getRoomInfo,
   updateRoomLikes,
   addComment,
+  updatePoopCounter,
 };

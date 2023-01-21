@@ -36,6 +36,7 @@ export default function RoomsCards() {
     return <PacLoader />;
   }
 }
+
 function roomsMap(roomsByScore, roomsByDate, orderByRating) {
   if (orderByRating) {
     return roomsByScore.map((room, ranking) => {

@@ -101,6 +101,7 @@ const handleSubmit = async (e) => {
     createdAt: new Date(),
     userName: auth.currentUser.displayName,
     poops: 0,
+    usersPooped: [],
   });
 
   window.scrollTo({

@@ -22,28 +22,18 @@ function RoomsScreen() {
     >
       <RoomsHeader />
 
-      {/* LOGO */}
-      {/* <img
-        src={require("../assets/logo.png")}
-        width="100%"
-        alt="logo"
-        style={{ borderRadius: 8 }}
-      /> */}
-
       {/* Instructions */}
       <Instructions />
 
       <RoomsCards />
       <MyBottomNavigation />
-
-      {/* <FloatingActionButton /> */}
     </div>
   );
 
-  function checkIfNewUser() {
-    const metadata = auth.currentUser.metadata;
-    return metadata.creationTime == metadata.lastSignInTime ? true : false;
-  }
+  // function checkIfNewUser() {
+  //   const metadata = auth.currentUser.metadata;
+  //   return metadata.creationTime == metadata.lastSignInTime ? true : false;
+  // }
 }
 
 export default RoomsScreen;
